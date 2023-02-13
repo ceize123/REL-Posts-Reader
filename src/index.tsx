@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App'
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+// Creating MUI theme
 let theme = createTheme({
 	palette: {
 		primary: {
@@ -29,9 +29,7 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme)
 
 root.render(
-	<React.StrictMode>
-		<ThemeProvider theme={theme}>
-    	<App />
-		</ThemeProvider>
-  </React.StrictMode>
+	<ThemeProvider theme={theme}>
+		<App />
+	</ThemeProvider>
 );
