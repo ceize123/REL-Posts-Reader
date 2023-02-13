@@ -4,9 +4,11 @@ import axios from 'axios'
 import { Posts } from '../types'
 import PostsCard from '../components/PostsCard'
 import Message from '../components/Message'
+import ErrorAlert from '../components/ErrorAlert'
 import Container from '@mui/material/Container'
 import { Box } from '@mui/material'
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+
 
 function Home() {
 	const [posts, setPosts] = useState<Posts[]>([])
@@ -88,16 +90,12 @@ function Home() {
 							)
 						}
 				})}
-				<div>
-					{loading &&
-						<Message msg='Loading...'/>
-						}
-				</div>
-				<div>
-					{error && !loading &&
-						<Message msg='Something went wrong. Please refresh the page!'/>
+				{loading &&
+					<Message msg='Loading...' />
 					}
-				</div>
+				{error && !loading &&
+					<ErrorAlert />
+				}
 				<ArrowCircleUpIcon
 					fontSize='large'
 					onClick={() => handleScrollToTop()}
