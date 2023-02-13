@@ -1,24 +1,23 @@
 import { Box, Typography } from '@mui/material'
 
-interface msg {
-	msg: string
+interface prop {
+	msg: string;
 }
 
-const Message: React.FC<msg> = ({ msg }) => {
-	const outputs = msg.split('. ')
+const Message: React.FC<prop> = ({ msg }) => {
 	return (
-		<Box mt={3} >
-			{outputs.map((output, idx) => {
-				return (
-					<Typography
-						key={idx}
-						align='center'
-						variant='h2'
-					>
-						{output}
-					</Typography>
-				)
-			})}
+		<Box
+			mt={3}
+			display='flex'
+			flexDirection='column'
+			alignItems='center'
+			justifyContent='center'
+		>
+			<Typography
+				variant='h2'
+			>
+				{msg}
+			</Typography>
 		</Box>
 	)
 }
