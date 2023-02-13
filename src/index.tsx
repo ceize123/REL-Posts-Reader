@@ -11,20 +11,19 @@ const root = ReactDOM.createRoot(
 let theme = createTheme({
 	palette: {
 		primary: {
-			main: '#000'
-		}
+			main: '#F7F0FF',
+			dark: '#A673EA'
+		},
 	},
 	typography: {
 		h1: {
-			fontSize: '3rem',
+			fontSize: '2rem',
+			fontWeight: 700
 		},
 		h2: {
-			fontSize: '2rem'
+			fontSize: '1.5rem',
 		},
-		h3: {
-			fontSize: '1rem'
-		}
-	}
+	},
 })
 theme = responsiveFontSizes(theme)
 

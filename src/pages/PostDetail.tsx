@@ -47,8 +47,16 @@ const PostDetail: React.FC = () => {
 					justifyContent='center'
 				>
 					<Link to={'/'} style={{textDecoration: 'none'}}>
-						<Button variant='contained'>
-								<Typography color='common.white'>Go Back</Typography>
+							<Button variant='contained'
+								sx={{
+									'&:hover': {
+										backgroundColor: '#000',
+										opacity: 0.8,
+									},
+									backgroundColor: '#000'
+								}}
+							>
+							<Typography color='common.white'>Go Back</Typography>
 						</Button>
 					</Link>
 				</Box>

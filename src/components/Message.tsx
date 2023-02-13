@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 
 interface prop {
 	msg: string;
@@ -6,19 +6,13 @@ interface prop {
 
 const Message: React.FC<prop> = ({ msg }) => {
 	return (
-		<Box
+		<Typography
 			mt={3}
-			display='flex'
-			flexDirection='column'
-			alignItems='center'
-			justifyContent='center'
+			align='center'
+			variant='h1'
 		>
-			<Typography
-				variant='h2'
-			>
-				{msg}
-			</Typography>
-		</Box>
+			{msg}
+		</Typography>
 	)
 }
 
