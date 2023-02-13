@@ -29,7 +29,6 @@ function Home() {
 		// Meaning everything that it is watching is going to be in entries array
 		// as soon as they become visible
 		observer.current = new IntersectionObserver(entries => {
-			console.log(entries)
 			if (entries[0].isIntersecting && hasMore) {
 				setStart(end + 1)
 				setEnd(end + 20)
