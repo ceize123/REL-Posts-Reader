@@ -15,7 +15,7 @@ const PostsCard: React.FC<Posts> = ({id, title, body}) => {
 				borderColor: 'primary.dark'
 			}}
 		>
-			<Typography mb={2}>{id}</Typography>
+			<Typography mb={1}>Post: {id}</Typography>
 			<Typography mb={2} variant='h1'>{title}</Typography>
 			<Typography variant='h2'>
 				{body.substring(0, 100)}{body.length > 100 && '...'}
