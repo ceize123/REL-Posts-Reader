@@ -1,6 +1,5 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Post } from '../types'
-import { Box } from '@mui/material'
 
 const PDCard: React.FC<Post> = ({name, email, body}) => {
 	return (

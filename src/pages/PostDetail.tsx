@@ -4,33 +4,16 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { IParams, Post } from '../types'
 import PDCard from '../components/PDCard'
+import Message from '../components/Message'
 import Container from '@mui/material/Container'
 import { Box, Button, Typography } from '@mui/material'
-import Message from '../components/Message'
 
 const PostDetail: React.FC = () => {
 	const [loading, setLoading] = useState(true)
 	const [postDetail, setPostDetail] = useState<Post[]>([])
-	// const [post, setPost] = useState<{Post: Posts}>()
 	const { id } = useParams<IParams | any>();
 	
-	
 	useEffect(() => {
-		// const urls = [
-		// 	`https://jsonplaceholder.typicode.com/posts/${id}/comments`,
-		// 	`https://jsonplaceholder.typicode.com/posts/${id}`,
-		// ];
-	
-		// const requests = urls.map((url) => axios.get(url));
-		// setLoading(true)
-		// axios.all(requests).then(res => {
-		// 	setPostDetail(res[0].data)
-		// 	setPost(res[1].data)
-		// 	setLoading(false)
-		// }).catch(e => {
-		// 	if (axios.isCancel(e)) return
-		// })
-		
 		axios({
 			method: 'GET',
 			url: `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
@@ -40,15 +23,8 @@ const PostDetail: React.FC = () => {
 		}).catch(e => {
 			if (axios.isCancel(e)) return
 		})
-		
-			// const fetchApi = async () => {
-			// 		const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
-			// 		const data = await response.json()
-			// 		console.log(data)
-			// 		setPostDetail(data)
-			// }
-			// fetchApi()
 	}, [id])
+
 	if (loading) return <Message msg='Loading...' />
 	return (
 		<Container maxWidth='lg'>
@@ -56,7 +32,7 @@ const PostDetail: React.FC = () => {
 				{postDetail.length > 0
 					&& postDetail.map((pDetail, idx) => {
 					return (
-							<PDCard key={idx} {...pDetail} />
+						<PDCard key={idx} {...pDetail} />
 					)
 					})}
 				<Link to={'/'} style={{textDecoration: 'none'}}>
