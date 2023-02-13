@@ -38,17 +38,6 @@ const PostDetail: React.FC = () => {
 			setLoading(false)
 			setError(true)
 		})
-
-		// axios({
-		// 	method: 'GET',
-		// 	url: `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
-		// }).then(res => { 
-		// 	setPostDetail(res.data)
-		// 	setLoading(false)
-		// }).catch(e => {
-		// 	setLoading(false)
-		// 	setError(true)
-		// })
 	}, [id])
 
 	if (loading) return <Message msg='Loading...' />
