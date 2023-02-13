@@ -3,10 +3,10 @@ html {
 	color: #4A4A4A;
 }
 
-.comment-text {
+.text-title {
 	position: relative;
 }
-.comment-text::after {
+.text-title::after {
 	content: '';
 	background-color: #DCC4FC;
 	width: 100%;

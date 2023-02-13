@@ -16,16 +16,39 @@ const PostDetail: React.FC = () => {
 	const { id } = useParams<IParams | any>();
 	
 	useEffect(() => {
-		axios({
-			method: 'GET',
-			url: `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
-		}).then(res => { 
-			setPostDetail(res.data)
+		const urls = [
+			`https://jsonplaceholder.typicode.com/posts/${id}/comments`,
+			`https://jsonplaceholder.typicode.com/posts/${id}`,
+		];
+
+		const requests = urls.map((url) => axios.get(url));
+		setLoading(true)
+		axios.all(requests).then(res => {
+			// Adding post title and body to comments data
+			const post = res[1].data
+			let objAry = []
+			for (let item of res[0].data) {
+				item['pBody'] = post['body']
+				item['pTitle'] = post['title']
+				objAry.push(item)
+			}
+			setPostDetail(objAry)
 			setLoading(false)
 		}).catch(e => {
 			setLoading(false)
 			setError(true)
 		})
+
+		// axios({
+		// 	method: 'GET',
+		// 	url: `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
+		// }).then(res => { 
+		// 	setPostDetail(res.data)
+		// 	setLoading(false)
+		// }).catch(e => {
+		// 	setLoading(false)
+		// 	setError(true)
+		// })
 	}, [id])
 
 	if (loading) return <Message msg='Loading...' />
