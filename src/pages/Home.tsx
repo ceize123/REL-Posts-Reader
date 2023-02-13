@@ -7,7 +7,9 @@ import Message from '../components/Message'
 import ErrorAlert from '../components/ErrorAlert'
 import Container from '@mui/material/Container'
 import { Box } from '@mui/material'
-import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 
 function Home() {
@@ -67,6 +69,14 @@ function Home() {
 		})
 	}, [start, end])
 
+	useEffect(() => {
+		 AOS.init({
+      offset: 100,
+      duration: 400,
+      easing: 'ease-in-out',
+    });
+	}, [])
+
 	const handleScrollToTop = () => {
 		window.scrollTo(0, 0)
 	}
@@ -78,13 +88,13 @@ function Home() {
 					&& posts.map((post, idx) => {
 						if (posts.length === idx + 1) { // every time it reaches 20, get a reference to that post 
 							return (
-								<div ref={lastPostEleRef} key={idx} onClick={() => { routeChange(post.id) }}>
+								<div ref={lastPostEleRef} key={idx} onClick={() => { routeChange(post.id) }} data-aos='fade-up'>
 									<PostsCard {...post} />
 								</div>
 							)
 						} else {
 							return (
-								<div key={idx} onClick={() => { routeChange(post.id) }}>
+								<div key={idx} onClick={() => { routeChange(post.id) }} data-aos='fade-up'>
 									<PostsCard {...post} />
 								</div>
 							)
