@@ -17,7 +17,11 @@ const PDCard: React.FC<Post> = ({name, email, body, pTitle, pBody}) => {
 				display='flex'
 				alignItems='center'
 			>
-				<img src={profileImg} alt='profile' />
+				<img
+					src={profileImg} alt='profile'
+					width='32'
+					height='32'
+				/>
 				<Typography ml={1}>{email}</Typography>
 			</Box>
 			<Box mb={3}>
