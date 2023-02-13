@@ -9,7 +9,7 @@ const Message: React.FC<prop> = ({ msg }) => {
 		<Typography
 			mt={3}
 			align='center'
-			variant='h1'
+			variant='h2'
 		>
 			{msg}
 		</Typography>
