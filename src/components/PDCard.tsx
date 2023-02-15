@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { Post } from '../types'
 import profileImg from '../image/profileImg.png'
 
-const PDCard: React.FC<Post> = ({name, email, body, pTitle, pBody}) => {
+const PDCard: React.FC<Post> = ({name, email, body}) => {
 	return (
 		<Box
 			my={3} p={2} border={1} borderRadius={3}
@@ -19,11 +19,6 @@ const PDCard: React.FC<Post> = ({name, email, body, pTitle, pBody}) => {
 			>
 				<img src={profileImg} alt='profile' />
 				<Typography ml={1}>{email}</Typography>
-			</Box>
-			<Box mb={3}>
-				<Typography className='text-title' display='inline' zIndex='10'>Post:</Typography>
-				<Typography mb={1} variant='h2'>{pTitle}</Typography>
-				<Typography>{pBody}</Typography>
 			</Box>
 			<Box>
 				<Typography className='text-title' display='inline' zIndex='10'>Comment:</Typography>
