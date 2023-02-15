@@ -47,6 +47,7 @@ const PostDetail: React.FC = () => {
 
 	if (loading) return <Message msg='Loading...' />
 	return (
+		<>
 		<Container maxWidth='lg'>
 			<Box  my={5} mx={{sm: 5}}>
 				{postDetail.length > 0
@@ -55,11 +56,9 @@ const PostDetail: React.FC = () => {
 						<PDCard key={idx} {...pDetail} />
 					)
 				})}
-				{error && !loading &&
-					<ErrorAlert />
-				}
-				{!error &&
-				<Box mt={3}
+			</Box>
+			{!error &&
+				<Box my={3}
 					display='flex'
 					justifyContent='center'
 				>
@@ -77,9 +76,12 @@ const PostDetail: React.FC = () => {
 						</Button>
 					</Link>
 				</Box>
-				}
-			</Box>
+			}
 		</Container>
+		{error && !loading &&
+			<ErrorAlert />
+		}
+		</>
 	)
 }
 
