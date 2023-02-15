@@ -16,8 +16,6 @@ function Home() {
 	const [posts, setPosts] = useState<Posts[]>([])
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)
-	const [hasMore, setHasMore] = useState(false)
-	const [start, setStart] = useState(0)
 	const [end, setEnd] = useState(20)
 
 	// Ref: Store data between renders that isn't part of state
@@ -26,21 +24,19 @@ function Home() {
 	const observer = useRef<any>()
 	// useCallback will be called every time element with lastPostEleRef is created
 	const lastPostEleRef = useCallback((node: any) => {
-		if (loading) return
 		// disconnect the observer from previous element
 		if (observer.current) observer.current.disconnect()
 		// IntersectionObserver takes all the entries that are available
 		// Meaning everything that it is watching is going to be in entries array
 		// as soon as they become visible
 		observer.current = new IntersectionObserver(entries => {
-			if (entries[0].isIntersecting && hasMore) {
-				setStart(end + 1)
+			if (entries[0].isIntersecting) {
 				setEnd(end + 20)
 			}
 		})
 		// make observer observe the very last node
 		if (node) observer.current.observe(node)
-	}, [loading, hasMore, end])
+	}, [end])
 
 	const navigate = useNavigate()
 	const routeChange = (postId: number) =>{ 
@@ -56,18 +52,13 @@ function Home() {
 			method: 'GET',
 			url: 'https://jsonplaceholder.typicode.com/posts'
 		}).then(res => {
-			// Pushing post from range 'start' to 'end'
-			setPosts(prevPost => {
-				return [...prevPost, ...res.data.slice(start, end)]
-			})
-			// there's always more if number of end is smaller than data length
-			setHasMore(res.data.length > end)
+			setPosts(res.data)
 			setLoading(false)
 		}).catch(() => {
 			setLoading(false)
 			setError(true)
 		})
-	}, [start, end])
+	}, [])
 
 	useEffect(() => {
 		 AOS.init({
@@ -82,30 +73,27 @@ function Home() {
 	}
 
 	return (
+		<>
 		<Container maxWidth='lg'>
 			<Box my={5} mx={{sm: 5}}>
 				{posts.length > 0
 					&& posts.map((post, idx) => {
-						if (posts.length === idx + 1) { // every time it reaches 20, get a reference to that post 
+						if (end === idx + 1) { // every time it reaches 20, get a reference to that post 
 							return (
 								<div ref={lastPostEleRef} key={idx} onClick={() => { routeChange(post.id) }} data-aos='fade-up'>
 									<PostsCard {...post} />
 								</div>
 							)
-						} else {
+						} else if (end > idx + 1) {
 							return (
 								<div key={idx} onClick={() => { routeChange(post.id) }} data-aos='fade-up'>
 									<PostsCard {...post} />
 								</div>
 							)
+						} else {
+							return <></>
 						}
 				})}
-				{loading &&
-					<Message msg='Loading...' />
-					}
-				{error && !loading &&
-					<ErrorAlert />
-				}
 				<ArrowCircleUpIcon
 					fontSize='large'
 					onClick={() => handleScrollToTop()}
@@ -118,6 +106,13 @@ function Home() {
 				/>
 			</Box>
 		</Container>
+		{loading &&
+			<Message msg='Loading...' />
+			}
+		{error && !loading &&
+			<ErrorAlert />
+		}
+		</>
 	);
 }
 
