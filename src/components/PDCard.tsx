@@ -4,16 +4,14 @@ import profileImg from '../image/profileImg.png'
 
 const PDCard: React.FC<Post> = ({name, email, body}) => {
 	return (
-		<Box
-			my={3} p={2} border={1} borderRadius={3}
+		<Box pb={1} my={3}
 			sx={{
-				backgroundColor: 'primary.main',
-				borderColor: 'primary.dark'
+				borderBottom: 1, borderColor: 'secondary.main'
 			}}
 		>
-			<Typography mb={1} variant='h1'>{name}</Typography>
+			<Typography mb={1} variant='h2'>{name}</Typography>
 			<Box
-				mb={3}
+				mb={1}
 				display='flex'
 				alignItems='center'
 			>
@@ -24,8 +22,7 @@ const PDCard: React.FC<Post> = ({name, email, body}) => {
 				/>
 				<Typography ml={1}>{email}</Typography>
 			</Box>
-			<Box>
-				<Typography className='text-title' display='inline' zIndex='10'>Comment:</Typography>
+			<Box pl={5}>
 				<Typography variant='h2'>{body}</Typography>
 			</Box>
 		</Box>

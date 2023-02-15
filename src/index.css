@@ -3,6 +3,11 @@ html {
 	color: #4A4A4A;
 }
 
+a {
+	text-decoration: none;
+	color: #4A4A4A;
+}
+
 .text-title {
 	position: relative;
 }
