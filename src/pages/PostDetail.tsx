@@ -25,14 +25,8 @@ const PostDetail: React.FC = () => {
 		setLoading(true)
 		axios.all(requests).then(res => {
 			// Adding post title and body to comments data
-			const post = res[1].data
-			let objAry = []
-			for (let item of res[0].data) {
-				item['pBody'] = post['body']
-				item['pTitle'] = post['title']
-				objAry.push(item)
-			}
-			setPostDetail(objAry)
+			const post = res[0].data
+			setPostDetail(post)
 			setLoading(false)
 		}).catch(e => {
 			setLoading(false)
