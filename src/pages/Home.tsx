@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { Posts } from '../types'
 import PostsCard from '../components/PostsCard'
 import Message from '../components/Message'
@@ -10,6 +9,7 @@ import { Box } from '@mui/material'
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import PostDataService from '../services/post.service'
 
 
 function Home() {
@@ -48,16 +48,14 @@ function Home() {
 		setLoading(true)
 		setError(false)
 
-		axios({
-			method: 'GET',
-			url: 'https://jsonplaceholder.typicode.com/posts'
-		}).then(res => {
-			setPosts(res.data)
-			setLoading(false)
-		}).catch(() => {
-			setLoading(false)
-			setError(true)
-		})
+		PostDataService.getAll()
+			.then((res: any) => {
+				setPosts(res.data)
+				setLoading(false)
+			}).catch(() => {
+				setLoading(false)
+				setError(true)
+			})
 	}, [])
 
 	useEffect(() => {
@@ -77,21 +75,19 @@ function Home() {
 		<Container maxWidth='lg'>
 			<Box my={5} mx={{sm: 5}}>
 				{posts.length > 0
-					&& posts.map((post, idx) => {
+					&& posts.slice(0, end).map((post, idx) => {
 						if (end === idx + 1) { // every time it reaches 20, get a reference to that post 
 							return (
 								<div ref={lastPostEleRef} key={idx} onClick={() => { routeChange(post.id) }} data-aos='fade-up'>
 									<PostsCard {...post} />
 								</div>
 							)
-						} else if (end > idx + 1) {
+						} else {
 							return (
 								<div key={idx} onClick={() => { routeChange(post.id) }} data-aos='fade-up'>
 									<PostsCard {...post} />
 								</div>
 							)
-						} else {
-							return <></>
 						}
 				})}
 				<ArrowCircleUpIcon

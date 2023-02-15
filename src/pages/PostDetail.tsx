@@ -1,37 +1,31 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import axios from 'axios'
-import { IParams, Post } from '../types'
+import { Post } from '../types'
 import PDCard from '../components/PDCard'
 import Message from '../components/Message'
 import ErrorAlert from '../components/ErrorAlert'
 import Container from '@mui/material/Container'
 import { Box, Button, Typography } from '@mui/material'
+import PostDataService from '../services/post.service'
 
 const PostDetail: React.FC = () => {
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)
 	const [postDetail, setPostDetail] = useState<Post[]>([])
-	const { id } = useParams<IParams | any>();
+	const { id } = useParams<string | any>();
 	
 	useEffect(() => {
-		const urls = [
-			`https://jsonplaceholder.typicode.com/posts/${id}/comments`,
-			`https://jsonplaceholder.typicode.com/posts/${id}`,
-		];
-
-		const requests = urls.map((url) => axios.get(url));
 		setLoading(true)
-		axios.all(requests).then(res => {
-			// Adding post title and body to comments data
-			const post = res[0].data
-			setPostDetail(post)
-			setLoading(false)
-		}).catch(e => {
-			setLoading(false)
-			setError(true)
-		})
+
+		PostDataService.getComment(id)
+			.then((res: any) => {
+				setPostDetail(res.data)
+				setLoading(false)
+			}).catch(() => {
+				setLoading(false)
+				setError(true)
+			})
 	}, [id])
 
 	if (loading) return <Message msg='Loading...' />
