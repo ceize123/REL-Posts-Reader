@@ -3,7 +3,6 @@ import Home from './pages/Home'
 import PostDetail from './pages/PostDetail'
 
 function App() {
-    
     return (
     <BrowserRouter>
       <Routes>

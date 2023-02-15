@@ -41,7 +41,7 @@ function Home() {
 	const navigate = useNavigate()
 	const routeChange = (postId: number) =>{ 
 			const path = `/posts/${postId}`
-			navigate(path);
+		navigate(path, {state: posts[postId - 1]})
 	}
 	
 	useEffect(() => {
