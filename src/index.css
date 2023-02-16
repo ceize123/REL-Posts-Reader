@@ -1,23 +1,23 @@
 html {
-	scroll-behavior: smooth;
-	color: #4A4A4A;
+  scroll-behavior: smooth;
+  color: #4a4a4a;
 }
 
 a {
-	text-decoration: none;
-	color: #4A4A4A;
+  text-decoration: none;
+  color: #4a4a4a;
 }
 
 .text-title {
-	position: relative;
+  position: relative;
 }
 .text-title::after {
-	content: '';
-	background-color: #DCC4FC;
-	width: 100%;
-	height: 7px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	z-index: -1;
+  content: '';
+  background-color: #dcc4fc;
+  width: 100%;
+  height: 7px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 }

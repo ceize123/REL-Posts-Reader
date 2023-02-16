@@ -3,35 +3,33 @@ import './index.css'
 import App from './App'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 // Creating MUI theme
 let theme = createTheme({
-	palette: {
-		primary: {
-			main: '#F7F0FF',
-			dark: '#A673EA'
-		},
-		secondary: {
-			main: '#D9D9D9'
-		}
-	},
-	typography: {
-		h1: {
-			fontSize: '2rem',
-			fontWeight: 700
-		},
-		h2: {
-			fontSize: '1.5rem',
-		},
-	},
+  palette: {
+    primary: {
+      main: '#F7F0FF',
+      dark: '#A673EA',
+    },
+    secondary: {
+      main: '#D9D9D9',
+    },
+  },
+  typography: {
+    h1: {
+      fontSize: '2rem',
+      fontWeight: 700,
+    },
+    h2: {
+      fontSize: '1.5rem',
+    },
+  },
 })
 theme = responsiveFontSizes(theme)
 
 root.render(
-	<ThemeProvider theme={theme}>
-		<App />
-	</ThemeProvider>
-);
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>
+)
